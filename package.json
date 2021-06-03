@@ -1,0 +1,12 @@
+{
+  "name": "circle",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "deploy": "surge . class-circle-bjorn.surge.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
