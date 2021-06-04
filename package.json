@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "parcel serve index.html",
-    "deploy": "surge . class-circle-bjorn.surge.sh"
+    "start": "parcel serve index.html --open",
+    "clean": "rm -rf ./.parcel-cache dist out",
+    "build": "npm run clean && parcel build ./index.html --dist-dir ./out --no-source-maps",
+    "serve": "live-server ./out",
+    "deploy": "surge ./out --domain https://class-circle-bjorn.surge.sh"
   },
   "keywords": [],
   "author": "",

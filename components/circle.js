@@ -1,18 +1,16 @@
 import randomColor from "randomcolor";
 
+const getRandomNumber = (min, max) => Math.round(Math.random() * (max - min) + min);
+
 export default class Circle {
-#x;
-#y;
-#size;
+#size = getRandomNumber(50, 250);
+#x = getRandomNumber(this.#size, window.innerWidth-this.#size);
+#y = getRandomNumber(this.#size, window.innerHeight-this.#size);;
 #holder;
 constructor(holder){
-    this.#x = this.#randomPlaceWidth();
-    this.#y = this.#randomPlaceHeight();
-    this.#size = this.#randomSize();
     this.#holder = holder;
     this.htmlRef = this.#initHTML();
     this.#setStyling();
-    // this.#setUpEvents();
 }    
 #initHTML(){
     this.#holder.insertAdjacentHTML(
@@ -20,17 +18,6 @@ constructor(holder){
         `<div class="circle"></div>`
     );
     return this.#holder.querySelector(".circle:last-child");
-}
-#randomPlaceWidth(){
-    let maxLeft = document.body.clientWidth - this.#randomSize();
-    return Math.floor(Math.random()*(maxLeft+1)+this.#randomSize())
-};
-#randomPlaceHeight(){
-    let maxTop = document.body.clientHeight - this.#randomSize();
-    return Math.floor(Math.random()*(maxTop + 1)+this.#randomSize())
-};
-#randomSize(){
-    return Math.floor(Math.random()*(250-50)+50)
 }
 #setStyling(){
     const styles = {
@@ -46,11 +33,4 @@ constructor(holder){
     };
     Object.assign(this.htmlRef.style, styles);
 }
-// #setUpEvents(){
-//     window.setInterval(()=>{
-// const arr = [];
-//     const circle = this.htmlRef
-//     arr.push(circle)
-//     },200)
-// }
 }
