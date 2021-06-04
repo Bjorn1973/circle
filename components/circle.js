@@ -5,13 +5,14 @@ export default class Circle {
 #y;
 #size;
 #holder;
-constructor(){
-    this.#x= this.#randomPlaceWidth();
-    this.#y= this.#randomPlaceHeight();
-    this.#size= this.#randomSize();
+constructor(holder){
+    this.#x = this.#randomPlaceWidth();
+    this.#y = this.#randomPlaceHeight();
+    this.#size = this.#randomSize();
     this.#holder = holder;
     this.htmlRef = this.#initHTML();
-    this.setStyling();
+    this.#setStyling();
+    // this.#setUpEvents();
 }    
 #initHTML(){
     this.#holder.insertAdjacentHTML(
@@ -21,10 +22,12 @@ constructor(){
     return this.#holder.querySelector(".circle:last-child");
 }
 #randomPlaceWidth(){
-    return Math.floor(Math.random()*screen.width)
+    let maxLeft = document.body.clientWidth - this.#randomSize();
+    return Math.floor(Math.random()*(maxLeft+1)+this.#randomSize())
 };
 #randomPlaceHeight(){
-    return Math.floor(Math.random()*screen.height)
+    let maxTop = document.body.clientHeight - this.#randomSize();
+    return Math.floor(Math.random()*(maxTop + 1)+this.#randomSize())
 };
 #randomSize(){
     return Math.floor(Math.random()*(250-50)+50)
@@ -34,10 +37,20 @@ constructor(){
         left: this.#x +"px",
         top :this.#y+"px",
         width: this.#size+"px",
-        height: auto,
+        height: this.#size+"px",
         backgroundColor: randomColor(),
         borderRadius: "50%",
-        border: "3px solid randomColor()",
-    }
+        borderWidth: "3px", 
+        borderStyle: "solid",
+        borderColor: randomColor(),
+    };
+    Object.assign(this.htmlRef.style, styles);
 }
+// #setUpEvents(){
+//     window.setInterval(()=>{
+// const arr = [];
+//     const circle = this.htmlRef
+//     arr.push(circle)
+//     },200)
+// }
 }
